@@ -4,11 +4,6 @@ const userNames = ["Петрик Ольга Іванівна", "Гнатюк П�
 let initials = userNames;
 
 // тут ваш код ...
-// initials = initials.map(user => user.split(' '));
-// initials = initials.map(user => user.map(word => word.charAt(0)));
-// initials = initials.map(user => user.join('.'));
-// initials = initials.sort();
-
 initials = initials.map(user => user.split(' ').map(word => word.charAt(0)).join('.')).sort();
 
 console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
