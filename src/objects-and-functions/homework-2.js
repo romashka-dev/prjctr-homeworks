@@ -8,14 +8,27 @@
 // Також вкажіть значення по замовчуванню для всіх цих параметрів (на ваш вибір).
 // Функція має коректно працювати навіть якщо початкова дата пізніше ніж кінцева дата.
 
-const durationBetweenDates = (dateFrom, dateTo) => {
+const durationBetweenDates = (dateFrom, dateTo, dimension = 'days') => {
     const start = new Date(dateFrom);
     const end = new Date(dateTo);
 
-    const timeDiff = Math.abs(end - start);
-    const durationInDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    const timeDiff = Math.abs(end.getTime() - start.getTime());
 
-    return `${durationInDays} days`;
+    if (dimension === 'days') {
+        const durationInDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        return `${durationInDays} days`;
+    } else if (dimension === 'hours') {
+        const durationInHours = Math.ceil(timeDiff / (1000 * 60 * 60));
+        return `${durationInHours} hours`;
+    } else if (dimension === 'minutes') {
+        const durationInMinutes = Math.ceil(timeDiff / (1000 * 60));
+        return `${durationInMinutes} minutes`;
+    } else if (dimension === 'seconds') {
+        const durationInSeconds = Math.ceil(timeDiff / 1000);
+        return `${durationInSeconds} seconds`;
+    } else {
+        return 'Invalid dimension';
+    }
 };
 
 // Test of durationBetweenDates():
@@ -49,8 +62,7 @@ const optimizer = (data) => {
 
     for (const item in data) {
         const lowerCaseKey = item.toLowerCase();
-        const roundedPrice = parseFloat(data[item]).toFixed(2);
-        updatedData[lowerCaseKey] = roundedPrice;
+        updatedData[lowerCaseKey] = parseFloat(data[item]).toFixed(2);
     }
 
     return updatedData;
@@ -73,11 +85,18 @@ let nikePriceData = optimizer(priceData2);
 const recursiveOddSumTo = (number) => {
 };
 
-// console.log(recursiveOddSumTo(3)) // 1
+// console.log(recursiveOddSumTo(1)) // 1
 // console.log(recursiveOddSumTo(10)) // 25
 
 // — функцію яка ітеративно (в циклі) буде знаходити суму всіх непарних додатних чисел до якогось числа.
 const iterativeOddSumTo = (number) => {
+    let sum = 0;
+
+    for (let i = 1; i <= number; i += 2) {
+      sum += i;
+    }
+  
+    return sum;
 };
 
 // console.log(iterativeOddSumTo(1)) // 1       
