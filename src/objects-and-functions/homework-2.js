@@ -8,23 +8,29 @@
 // Також вкажіть значення по замовчуванню для всіх цих параметрів (на ваш вибір).
 // Функція має коректно працювати навіть якщо початкова дата пізніше ніж кінцева дата.
 
-const durationBetweenDates = (dateFrom, dateTo, dimension = 'days') => {
+const durationBetweenDates = (dateFrom = new Date('2020-10-15'), dateTo = new Date(), dimension = 'days') => {
     const start = new Date(dateFrom);
     const end = new Date(dateTo);
 
+    // Перевіряємо чи дійсно в змінних буде дата, щоби уникнути помилок
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+        return 'Invalid date';
+    }
+
     const timeDiff = Math.abs(end.getTime() - start.getTime());
 
+    const durationInSeconds = Math.ceil(timeDiff / 1000);
+    const durationInMinutes = Math.ceil(timeDiff / (1000 * 60));
+    const durationInHours = Math.ceil(timeDiff / (1000 * 60 * 60));
+    const durationInDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
     if (dimension === 'days') {
-        const durationInDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
         return `${durationInDays} days`;
     } else if (dimension === 'hours') {
-        const durationInHours = Math.ceil(timeDiff / (1000 * 60 * 60));
         return `${durationInHours} hours`;
     } else if (dimension === 'minutes') {
-        const durationInMinutes = Math.ceil(timeDiff / (1000 * 60));
         return `${durationInMinutes} minutes`;
     } else if (dimension === 'seconds') {
-        const durationInSeconds = Math.ceil(timeDiff / 1000);
         return `${durationInSeconds} seconds`;
     } else {
         return 'Invalid dimension';
@@ -32,9 +38,7 @@ const durationBetweenDates = (dateFrom, dateTo, dimension = 'days') => {
 };
 
 // Test of durationBetweenDates():
-// console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')); // поверне '362 days'
-// console.log(durationBetweenDates('01 Jan 2014', '03 Feb 2023', 'days')); // поверне '3320 days'
-// console.log(durationBetweenDates('01 Jan 2018', '03 Feb 2023', 'days')); // поверне '1859 days'
+console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')); // поверне '362 days'
 
 
 
@@ -51,12 +55,6 @@ const priceData = {
     oRAngGEs: '48.7584'
 };
 
-const priceData2 = {
-    SnEakerS_AirForce_320: '599.45',
-    SnEakerS_RunnING_110: '428.1',
-    snEakerS_runnING_150: '499.7584'
-};
-
 const optimizer = (data) => {
     const updatedData = {};
 
@@ -69,10 +67,8 @@ const optimizer = (data) => {
 };
 
 let updatedPriceData = optimizer(priceData);
-let nikePriceData = optimizer(priceData2);
 // Test of durationBetweenDates():
 // console.log(updatedPriceData) // { apples: '23.40', bananas: '48.00', oranges: '48.76' }
-// console.log(nikePriceData) // { sneakers_airforce_320: '599.45', sneakers_running_110: '428.10', sneakers_running_150: '499.76' }
 
 
 
@@ -82,7 +78,12 @@ let nikePriceData = optimizer(priceData2);
 // Задача про рекурсію та ітерацію
 // Напишіть:
 // — функцію яка рекурсивно буде знаходити суму всіх непарних додатних чисел до якогось числа.
-const recursiveOddSumTo = (number) => {
+const recursiveOddSumTo = (number, current = 1) => {
+    if (current > number) {
+        return 0;
+    }
+    
+    return current + recursiveOddSumTo(number, current + 2);
 };
 
 // console.log(recursiveOddSumTo(1)) // 1
