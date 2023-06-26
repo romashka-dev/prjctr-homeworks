@@ -8,7 +8,7 @@
 // Також вкажіть значення по замовчуванню для всіх цих параметрів (на ваш вибір).
 // Функція має коректно працювати навіть якщо початкова дата пізніше ніж кінцева дата.
 
-const durationBetweenDates = (dateFrom = new Date('2020-10-15'), dateTo = new Date(), dimension = 'days') => {
+const durationBetweenDates = (dateFrom = new Date('31 Jan 2022'), dateTo = new Date(), dimension = 'days') => {
     const start = new Date(dateFrom);
     const end = new Date(dateTo);
 
@@ -17,28 +17,33 @@ const durationBetweenDates = (dateFrom = new Date('2020-10-15'), dateTo = new Da
         return 'Invalid date';
     }
 
-    const timeDiff = Math.abs(end.getTime() - start.getTime());
+    const timeDiffSeconds = Math.abs(end.getTime() - start.getTime()) / 1000;
+    const timeDiffMinutes = Math.abs(end.getTime() - start.getTime()) / (1000 * 60);
+    const timeDiffHours = Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60);
+    const timeDiffDays = Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24);
 
-    const durationInSeconds = Math.ceil(timeDiff / 1000);
-    const durationInMinutes = Math.ceil(timeDiff / (1000 * 60));
-    const durationInHours = Math.ceil(timeDiff / (1000 * 60 * 60));
-    const durationInDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    const durationInSeconds = Math.ceil(timeDiffSeconds);
+    const durationInMinutes = Math.ceil(timeDiffMinutes);
+    const durationInHours = Math.ceil(timeDiffHours);
+    const durationInDays = Math.ceil(timeDiffDays);
 
-    if (dimension === 'days') {
-        return `${durationInDays} days`;
-    } else if (dimension === 'hours') {
-        return `${durationInHours} hours`;
-    } else if (dimension === 'minutes') {
-        return `${durationInMinutes} minutes`;
-    } else if (dimension === 'seconds') {
-        return `${durationInSeconds} seconds`;
-    } else {
-        return 'Invalid dimension';
+    switch (dimension) {
+        case 'days':
+            return `${durationInDays} days`;
+        case 'hours':
+            return `${durationInHours} hours`;
+        case 'minutes':
+            return `${durationInMinutes} minutes`;
+        case 'seconds':
+            return `${durationInSeconds} seconds`;
+        default:
+            return 'Invalid dimension';
     }
 };
 
 // Test of durationBetweenDates():
-console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')); // поверне '362 days'
+// console.log(durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds')); // поверне '86400 seconds'
+// console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')); // поверне '362 days'
 
 
 
@@ -67,6 +72,7 @@ const optimizer = (data) => {
 };
 
 let updatedPriceData = optimizer(priceData);
+
 // Test of durationBetweenDates():
 // console.log(updatedPriceData) // { apples: '23.40', bananas: '48.00', oranges: '48.76' }
 
@@ -78,12 +84,18 @@ let updatedPriceData = optimizer(priceData);
 // Задача про рекурсію та ітерацію
 // Напишіть:
 // — функцію яка рекурсивно буде знаходити суму всіх непарних додатних чисел до якогось числа.
-const recursiveOddSumTo = (number, current = 1) => {
-    if (current > number) {
-        return 0;
-    }
+const recursiveOddSumTo = (number) => {
+    const current = 1;
+
+    const oddSumTo = (current) => {
+        if (current > number) {
+            return 0;
+        }
+
+        return current + oddSumTo(current + 2);
+    };
     
-    return current + recursiveOddSumTo(number, current + 2);
+    return oddSumTo(current);
 };
 
 // console.log(recursiveOddSumTo(1)) // 1
