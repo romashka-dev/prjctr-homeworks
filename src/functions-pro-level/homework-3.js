@@ -147,30 +147,30 @@ function detonatorTimer(delay) {
 // --- TASK 5 --- //
 // Напишіть об'єкт, в якому опишіть свої довільні властивості та довільні методи (2-3 штуки), що ці властивості виводять. 
 // Наприклад:
-// let me = {
-//     name: 'Mykola',
-//     residency: 'Lviv',
-//     gender: 'male',
-//     age: 31,
-//     hobby: 'crafting',
-//     defaultMood: 'focused',
-//     currentMood: 'sleepy',
-//     introduce() {
-//         console.log(`My name is ${this.name} and I live in ${this.residency}`);
-//     },
-//     prognose() {
-//         console.log(`I hope that next year I'm gonna be ${this.age+1}`);
-//     },
-//     describeMyMood(){
-//         console.log(`Mostly I'm ${this.defaultMood}, but now I'm ${this.currentMood}`);
-//     }
-// }
+let me = {
+    name: 'Mykola',
+    residency: 'Lviv',
+    gender: 'male',
+    age: 31,
+    hobby: 'crafting',
+    defaultMood: 'focused',
+    currentMood: 'sleepy',
+    introduce() {
+        console.log(`My name is ${this.name} and I live in ${this.residency}`);
+    },
+    prognose() {
+        console.log(`I hope that next year I'm gonna be ${this.age+1}`);
+    },
+    describeMyMood(){
+        console.log(`Mostly I'm ${this.defaultMood}, but now I'm ${this.currentMood}`);
+    }
+}
     
 // me.introduce();
 // me.prognose();
 // me.describeMyMood();
 
-let me = {
+let romanData = {
     name: 'Roman',
     residency: 'Ukraine',
     gender: 'male',
@@ -193,9 +193,9 @@ let me = {
     }
 }
 
-// me.intro();
-// me.education();
-// me.contactWithMe();
+// romanData.intro();
+// romanData.education();
+// romanData.contactWithMe();
 
 
 
@@ -204,19 +204,14 @@ let me = {
 // --- TASK 6 --- //
 // А тепер зробіть всі свої методи з задачі 5 прив'язаними до контексту свого об'єкту 
 // aби вони були захищені від перезапису об'єкту і їх можна було викликати в таймері:
-let securedSelfIntroduce = () => {
-    me.intro();
-};
-let securedSelfPrognose = () => {
-    me.education();
-};
-let securedSelfDescribeMyMood = () => {
-    me.contactWithMe();
-};
 
-// setTimeout(securedSelfIntroduce, 1000); // виведе коректний результат*
-// setTimeout(securedSelfPrognose, 2000); // виведе коректний результат*
-// setTimeout(securedSelfDescribeMyMood, 3000); // виведе коректний результат*
+// romanData.intro = romanData.intro.bind(romanData);
+// romanData.education = romanData.education.bind(romanData);
+// romanData.contactWithMe = romanData.contactWithMe.bind(romanData);
+
+// setTimeout(romanData.intro, 1000); // виведе коректний результат*
+// setTimeout(romanData.education, 2000); // виведе коректний результат*
+// setTimeout(romanData.contactWithMe, 3000); // виведе коректний результат*
 
 
 
@@ -224,7 +219,7 @@ let securedSelfDescribeMyMood = () => {
 
 // --- TASK 7 --- //
 // Напишіть функцію-декоратор яка вповільнює виконання довільної функції на вказану кількість секунд.
-function someFunction {
+function someFunction() {
     // тут напишіть довільну функцію яка робить якусь роботу зі своїми аргументами та виводить результат в консоль
 };
 
