@@ -219,17 +219,27 @@ let romanData = {
 
 // --- TASK 7 --- //
 // Напишіть функцію-декоратор яка вповільнює виконання довільної функції на вказану кількість секунд.
-function someFunction() {
+function someFunction(a, b) {
     // тут напишіть довільну функцію яка робить якусь роботу зі своїми аргументами та виводить результат в консоль
+    const sum = a + b;
+    return sum;
 };
 
 function slower(func, seconds) {
     // тут ваш код для декоратора*
+    return function (...args) {
+        console.log(`Chill out, you will get your result in ${seconds} seconds`);
+
+        setTimeout(() => {
+        const result = func(...args);
+        console.log('Result:', result);
+        }, seconds * 1000);
+    };
 };
     
 let slowedSomeFunction = slower(someFunction, 5); // обгортаєте свою довільну функцію 'someFunction' в декоратор*
     
-slowedSomeFunction(/*якісь аргументи*/); // викликаєте декоратор*
+slowedSomeFunction(10, 15); // викликаєте декоратор*
     
 // виведе в консоль "Chill out, you will get you result in 5 seconds"
 //...через 5 секунд виведе результат роботи 'someFunction*'
