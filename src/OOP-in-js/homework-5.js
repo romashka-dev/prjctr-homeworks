@@ -12,9 +12,13 @@
 
 // COMMON CLASS FOR APARTMENTS AND ORGANIZATION
 class CommonRules {
-    constructor() {
-    // Приватна властивість, що може бути використана наприклад в Apartments або Organization
-      this._privatPropertyCommonRules = 'This is a privat property for class CommonRules';
+    #privatPropertyCommonRules;
+
+    constructor(phoneNumber) {
+      this.phoneNumber = phoneNumber;
+
+      // Приватна властивість в цьому класі
+      this.#privatPropertyCommonRules = 'This is a privat property for class CommonRules';
     }
   
     // Загальний метод, що використовується для класів Apartments і Organization
@@ -27,6 +31,8 @@ class CommonRules {
 
 // CLASS CAR
 class Car {
+    #privatPropertyCar;
+
     constructor(brand, model, color, bodyType, transmission, typeOfFuel) {
         this.brand = brand;
         this.model = model;
@@ -37,7 +43,7 @@ class Car {
         this.isEngineRunning = false;
 
         // Приватна властивість в цьому класі 
-        this._privatPropertyCar = 'This is a privat property for class Car';
+        this.#privatPropertyCar = 'This is a privat property for class Car';
     }
 
     startEngine() {
@@ -65,8 +71,7 @@ class Car {
             color: this.color,
             bodyType: this.bodyType,
             transmission: this.transmission,
-            typeOfFuel: this.typeOfFuel,
-            _privatPropertyCar: this._privatPropertyCar
+            typeOfFuel: this.typeOfFuel
         };
     }
 }
@@ -82,6 +87,8 @@ console.log(myCar.getCarInfo()); // Виведе об'єкт
 
 // CLASS CAT
 class Cat {
+    #privatPropertyCat;
+
     constructor(name, color, breed, age) {
         this.name = name;
         this.color = color;
@@ -89,7 +96,7 @@ class Cat {
         this.age = age;
 
         // Приватна властивість в цьому класі
-        this._privatPropertyCat = 'This is a privat property for class Cat';
+        this.#privatPropertyCat = 'This is a privat property for class Cat';
     }
 
     healthy(answer) {
@@ -114,8 +121,10 @@ myCat.sleep(); // Виведе: Tina is sleeping.
 
 // CLASS APARTMENTS 
 class Apartments extends CommonRules {
+    #privatPropertyApartments;
+
     constructor(address, bedroomQuantity, wifi, kitchen, bathroom, parking, phoneNumber) {
-        super();
+        super(phoneNumber);
         this.address = address;
         this.bedroomQuantity = bedroomQuantity;
         this.wifi = wifi;
@@ -125,7 +134,7 @@ class Apartments extends CommonRules {
         this.phoneNumber = phoneNumber;
 
         // Приватна властивість в цьому класі
-        this._privatPropertyApartments = 'This is a privat property for class Apartments';
+        this.#privatPropertyApartments = 'This is a privat property for class Apartments';
     }
 
     getAddress() {
@@ -147,8 +156,7 @@ class Apartments extends CommonRules {
             hasWifi: this.hasWifi(),
             hasKitchen: this.kitchen ? "Yes" : "No",
             hasBathroom: this.bathroom ? "Yes" : "No",
-            hasParking: this.hasParking(),
-            _privatPropertyApartments: this._privatPropertyApartments
+            hasParking: this.hasParking()
         };
     }
 }
@@ -161,8 +169,10 @@ console.log(myfriendApt.getPhoneNumber()); // Використовується �
 
 // CLASS ORGANIZATION 
 class Organization extends CommonRules {
+    #privatPropertyOrganization;
+    
     constructor(industries, headquartersRegions, foundedDate, founders, operatingStatus, lastFundingType, legalName, companyType, phoneNumber) {
-        super();
+        super(phoneNumber);
         this.industries = industries;
         this.headquartersRegions = headquartersRegions;
         this.foundedDate = foundedDate;
@@ -174,7 +184,7 @@ class Organization extends CommonRules {
         this.phoneNumber = phoneNumber;
 
         // Приватна властивість в цьому класі
-        this._privatPropertyOrganization = 'This is a privat property for class Organization';
+        this.#privatPropertyOrganization = 'This is a privat property for class Organization';
     }
 
     getIndustries() {
@@ -199,8 +209,7 @@ class Organization extends CommonRules {
             lastFundingType: this.lastFundingType,
             legalName: this.legalName,
             companyType: this.companyType,
-            phoneNumber: this.phoneNumber,
-            _privatPropertyOrganization: this._privatPropertyOrganization
+            phoneNumber: this.phoneNumber
         };
     }
 }
