@@ -1,0 +1,83 @@
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  padding: 30px; 
+  min-height: 100vh; 
+}
+
+.redBtn {
+  background-color: red;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: yellow;
+  font-size: 16px;
+}
+
+.myDiv {
+  position: absolute;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.myBtn {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 16px 24px;
+  width: 100%;
+  min-height: 60px;
+  min-width: 0;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #6527be;
+  border-radius: 8px;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+}
+
+.myBtn:disabled {
+  pointer-events: none;
+}
+
+.myBtn:hover {
+  background-color: #6c34bb;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+}
+
+.myBtn:active {
+  box-shadow: none;
+}
+
+.turn-off {
+  background-color: #f1f0f0;
+}
+
+.turn-on {
+  background-color: #4a4a4a;
+}
+
+.myDiv > span {
+  text-align: center;
+}
